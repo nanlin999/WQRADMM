@@ -18,7 +18,7 @@
 #' @return The coefficient estimation, the number of iterations and the running time for the WQR-ADMM algorithm, and the total time cost for computing the WQR estimator (when the parameter esttype = "WQR")
 #' @examples
 #' N = 20000
-#' p = 100
+#' p = 200
 #' n = 10
 #' rep = rep(n, N)
 #' nsum = sum(rep)
@@ -60,13 +60,6 @@
 #' Y = X[,2:p]%*%beta_true[2:p]+X[,1]*e
 #'
 #' k = 3
-#'
-#' paraCQR = paraWQRADMM(X, Y, K[k], rep, tau, FALSE, "CQR", "ar1")
-#' beta_paraCQR = paraCQR$Estimation_CQR
-#' AE_paraCQR = sum(abs(beta_paraCQR-beta_true))
-#' Iteration_paraCQR = paraCQR$Iteration_CQR
-#' Time_paraCQR = paraCQR$Time_CQR
-#'
 #' paraWQR = paraWQRADMM(X, Y, K[k], rep, tau, FALSE, "WQR", "ar1")
 #' beta_paraWQR = paraWQR$Estimation_WQR
 #' AE_paraWQR = sum(abs(beta_paraWQR-beta_true))
