@@ -54,12 +54,6 @@
 #' e = as.vector(t(e%*%chol(cov_e)))
 #' Y = X[,2:p]%*%beta_true[2:p]+X[,1]*e
 #'
-#' CQR = WQRADMM(X, Y, rep, tau, FALSE, "CQR", "ar1")
-#' beta_CQR = CQR$Estimation_CQR
-#' AE_CQR = sum(abs(beta_CQR-beta_true))
-#' Iteration_CQR = CQR$Iteration_CQR
-#' Time_CQR = CQR$Time_CQR
-#'
 #' WQR = WQRADMM(X, Y, rep, tau, FALSE, "WQR", "ar1")
 #' beta_WQR = WQR$Estimation_WQR
 #' AE_WQR = sum(abs(beta_WQR-beta_true))
