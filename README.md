@@ -32,20 +32,34 @@ rho_e = 0.5
 tau = 0.7
 
 gcov = function(p, rho, type){
+
    if(type == "exchangeable"){
+   
      cov = matrix(rho, p, p)
+     
      diag(cov) = rep(1, p)
+     
    }
    else{
+   
      cov = diag(p)
+     
      for(i in 1:p){
+     
        for(j in 1:p){
+       
          if(i < j) cov[i,j] = rho^{j-i}
+         
          else cov[i,j] = cov[j,i]
+         
        }
+       
      }
+     
    }
+   
    cov
+   
 }
 
 set.seed(66)
