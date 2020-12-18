@@ -6,3 +6,49 @@ It can be used to reproduce the simulation studies in the following paper:
 **Ye Fan, Nan Lin and Liqun Yu**. *Distributed Quantile Regression for Longitudinal Big Data.*
 
 Two main functions are included: **WQRADMMCPP( )** and **paraWQRADMMCPP( )**, designed for the non-distributed and distributed implementation, repectively. Please see file "WQRADMM.cpp" in folder "src". 
+
+A sample code to use this package (see also files "WQRADMMexample.R" and "paraWQRADMMexample.R" in folder "R"):
+library(devtools)
+install_github("https://github.com/nanlin999/WQRADMM")
+library(WQRADMM)
+N = 10000
+p = 100
+n = 10
+rep = rep(n, N)
+nsum = sum(rep)
+rho_X = 0.5
+rho_e = 0.5
+tau = 0.7
+gcov = function(p, rho, type){
+   if(type == "exchangeable"){
+     cov = matrix(rho, p, p)
+     diag(cov) = rep(1, p)
+   }
+   else{
+     cov = diag(p)
+     for(i in 1:p){
+       for(j in 1:p){
+         if(i < j) cov[i,j] = rho^{j-i}
+         else cov[i,j] = cov[j,i]
+       }
+     }
+   }
+   cov
+}
+set.seed(66)
+X = matrix(rnorm(nsum*p), nsum, p)
+cov_X = gcov(p, rho_X, "ar1")
+X = X%*%chol(cov_X)
+X[,1] = pnorm(X[,1])
+beta_true = rnorm(p)
+beta_true[1] = qnorm(tau)
+cov_e = gcov(n, rho_e, "ar1")
+e = matrix(rnorm(N*n), N, n)
+e = as.vector(t(e%*%chol(cov_e)))
+Y = X[,2:p]%*%beta_true[2:p]+X[,1]*e
+WQR = WQRADMMCPP(X, Y, rep, tau, FALSE, "WQR", "ar1")
+beta_WQR = WQR$Estimation_WQR
+AE_WQR = sum(abs(beta_WQR-beta_true))
+Iteration_WQR = WQR$Iteration_WQR
+Time_WQR = WQR$Time_WQR
+Time_total = WQR$Time_total
