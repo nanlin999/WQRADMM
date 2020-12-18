@@ -1,5 +1,0 @@
-exportPattern("^[[:alpha:]]+")
-export(WQRADMM)
-export(paraWQRADMM)
-importFrom(Rcpp,sourceCpp)
-useDynLib(WQRADMM)
