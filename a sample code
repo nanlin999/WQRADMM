@@ -1,4 +1,5 @@
 A sample code to use this package (see also files "WQRADMMexample.R" and "paraWQRADMMexample.R" in folder "R"):
+
 library(devtools)
 install_github("https://github.com/nanlin999/WQRADMM")
 library(WQRADMM)
