@@ -1,4 +1,4 @@
-# WQRADMM
+# WQRADMM for Windows users
 R package for distributed quantile regression in longitudinal big data based on multi-block ADMM.
 
 It can be used to reproduce the simulation studies in the following paper:
