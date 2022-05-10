@@ -9,10 +9,9 @@ Two main functions are included: **WQRADMM( )** and **paraWQRADMM( )**, repectiv
 
 **Note:** please install RTools and further put its location on the environment variable PATH before installing this package. 
 
-**An example**
+**An example:**
 
-N = 10000
-
+N = 10000\
 p = 100
 
 n = 10
