@@ -21,11 +21,13 @@ rho_X = 0.5\
 rho_e = 0.5\
 tau = 0.75\
 sigma = 0.5\
-gcov = function(p, rho, type){\
+gcov = function(p, rho, type){
+
   if(type == "exchangeable"){\
     cov = matrix(rho, p, p)\
     diag(cov) = rep(1, p)\ 
-  }\
+  }
+  
   else{\ 
     cov = diag(p)\
     for(i in 1:p){\
@@ -34,8 +36,10 @@ gcov = function(p, rho, type){\
         else cov[i,j] = cov[j,i]\
       }\ 
     }\    
-  }\ 
-  cov\  
+  }
+  
+  cov
+  
 }
 
 set.seed(999)\
