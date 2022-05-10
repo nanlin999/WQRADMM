@@ -12,17 +12,12 @@ Two main functions are included: **WQRADMM( )** and **paraWQRADMM( )**, repectiv
 **An example:**
 
 N = 10000\
-p = 100
-
-n = 10
-
-rep = rep(n, N)
-
-nsum = sum(rep)
-
-d = 0.75*p
-
-rho_X = 0.5
+p = 100\
+n = 10\
+rep = rep(n, N)\
+nsum = sum(rep)\
+d = 0.75*p\
+rho_X = 0.5\
 
 rho_e = 0.5
 
