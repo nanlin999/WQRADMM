@@ -18,10 +18,8 @@ rep = rep(n, N)\
 nsum = sum(rep)\
 d = 0.75*p\
 rho_X = 0.5\
-
-rho_e = 0.5
-
-tau = 0.75
+rho_e = 0.5\
+tau = 0.75\
 
 sigma = 0.5
 
