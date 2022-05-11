@@ -72,4 +72,8 @@ AE_WQR = sum(abs(beta_WQR-beta_true))
 Iteration_WQR = WQR$Iteration_WQR
 Time_WQR = WQR$Time_WQR
 Time_total = WQR$Time_total
+
+AE_WQR
+Time_WQR
+Time_total
 ```
