@@ -11,8 +11,8 @@ Two main functions are included: **WQRADMM( )** and **paraWQRADMM( )**, repectiv
 
 **A sample code**
 
-(```)
+```
 
 e = rnorm(100)
 
-(```)
+```
