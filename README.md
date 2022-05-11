@@ -8,7 +8,3 @@ It can be used to reproduce the simulation studies in the following paper:
 Two main functions are included: **WQRADMM( )** and **paraWQRADMM( )**, repectively designed for non-distributed and distributed environments.
 
 **Note:** please install RTools and further put its location on the environment variable PATH before installing this package. 
-
-public class InsertCoder(File file,Context){
-    this.text=super.text;
-}
