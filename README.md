@@ -44,7 +44,7 @@ gcov = function(p, rho, type){
   cov
 }
 
-###generate synthetic data
+###generate synthetic data (heteroscedastic model with d = 0.75*p under Student's t error)
 N = 10000
 p = 100
 n = 10
