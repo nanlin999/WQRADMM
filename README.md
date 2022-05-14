@@ -26,7 +26,7 @@ library(WQRADMM)
 **Code for testing WQRADMM**
 
 ```
-###function for generating the AR(1) or exchangeable correlation matrix
+###function for generating the correlation matrix (AR(1) or exchangeable)
 gcov = function(p, rho, type){
   if(type == "exchangeable"){
     cov = matrix(rho, p, p)
@@ -70,12 +70,14 @@ e = sigma*e
 Y = X%*%beta+apply(X[,1:d]*e/d, 1, sum)
 beta_true = c(quantile(e/d, tau)+beta[1:d], beta[(d+1):p])
 
+###calculate the traditional quantile regression estimator
 CQR = WQRADMM(X, Y, rep, tau, FALSE, "CQR")
 beta_CQR = CQR$Estimation_CQR
 AE_CQR = sum(abs(beta_CQR-beta_true))
 Iteration_CQR = CQR$Iteration_CQR
 Time_CQR = CQR$Time_CQR
 
+###calculate the weighted quantile regression estimator
 WQR = WQRADMM(X, Y, rep, tau, FALSE, "WQR")
 beta_WQR = WQR$Estimation_WQR
 AE_WQR = sum(abs(beta_WQR-beta_true))
