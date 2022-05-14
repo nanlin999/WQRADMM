@@ -85,7 +85,11 @@ Iteration_WQR = WQR$Iteration_WQR
 Time_WQR = WQR$Time_WQR
 Time_total = WQR$Time_total
 
+###output the results
+##absolute estimation error 
 AE_WQR
+##running time for solving WQR problem
 Time_WQR
+##total time cost
 Time_total
 ```
