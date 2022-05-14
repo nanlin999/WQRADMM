@@ -9,12 +9,12 @@ It can be used to reproduce the simulation studies in the following paper:
 
 Two main functions are included: **WQRADMM( )** and **paraWQRADMM( )**, repectively designed for non-distributed and distributed environments.
 
-## Installation requirements** 
+## Installation requirements 
 ```
 Install RTools and further put its location on the environment variable PATH before installing this package. 
 ```
 
-## Code for installing WQRADMM**
+## Code for installing WQRADMM
 ```
 install.packages("devtools")
 library(devtools)
@@ -22,7 +22,7 @@ install_github("https://github.com/nanlin999/WQRADMM", force = TRUE)
 library(WQRADMM)
 ```
 
-## Code for testing WQRADMM**
+## Code for testing WQRADMM
 
 ```
 ###function for generating the correlation matrix (AR(1) or exchangeable)
