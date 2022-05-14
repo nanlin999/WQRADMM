@@ -12,14 +12,17 @@ Two main functions are included: **WQRADMM( )** and **paraWQRADMM( )**, repectiv
 Install RTools and further put its location on the environment variable PATH before installing this package. 
 ```
 
-**A sample code**
-
+**Code for installing WQRADMM**
 ```
 install.packages("devtools")
 library(devtools)
 install_github("https://github.com/nanlin999/WQRADMM", force = TRUE)
 library(WQRADMM)
+```
 
+**Code for testing WQRADMM**
+
+```
 N = 10000
 p = 100
 n = 10
