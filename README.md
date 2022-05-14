@@ -26,17 +26,7 @@ library(WQRADMM)
 **Code for testing WQRADMM**
 
 ```
-N = 10000
-p = 100
-n = 10
-rep = rep(n, N)
-nsum = sum(rep)
-d = 0.75*p
-rho_X = 0.5
-rho_e = 0.5
-tau = 0.75
-sigma = 0.5
-
+###function for generating the AR(1) or exchangeable correlation matrix
 gcov = function(p, rho, type){
   if(type == "exchangeable"){
     cov = matrix(rho, p, p)
@@ -54,6 +44,16 @@ gcov = function(p, rho, type){
   cov
 }
 
+###generate synthetic data
+N = 10000
+p = 100
+n = 10
+rep = rep(n, N)
+nsum = sum(rep)
+d = 0.75*p
+rho_X = 0.5
+rho_e = 0.5
+tau = 0.75
 set.seed(999)
 X = matrix(rnorm(nsum*p), nsum, p)
 cov_X = gcov(p, rho_X, "ar1")
@@ -65,6 +65,7 @@ beta = rnorm(p)
 cov_e = gcov(n, rho_e, "ar1")
 e = matrix(rt(N*n, 3), N, n)
 e = as.vector(t(e%*%chol(cov_e)))
+sigma = 0.5
 e = sigma*e
 Y = X%*%beta+apply(X[,1:d]*e/d, 1, sum)
 beta_true = c(quantile(e/d, tau)+beta[1:d], beta[(d+1):p])
