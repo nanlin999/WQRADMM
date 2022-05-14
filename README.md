@@ -1,11 +1,11 @@
 # WQRADMM for Windows users
+**Instructions**
+```
 R package for distributed quantile regression in longitudinal big data based on ADMM.
-
 It can be used to reproduce the simulation studies in the following paper:
-
 **Ye Fan, Nan Lin and Liqun Yu**. *Distributed Quantile Regression for Longitudinal Big Data.*
-
 Two main functions are included: **WQRADMM( )** and **paraWQRADMM( )**, repectively designed for non-distributed and distributed environments.
+```
 
 **Installation requirements** 
 ```
