@@ -85,7 +85,7 @@ Time_WQR = WQR$Time_WQR
 Time_total = WQR$Time_total
 
 ###output the results
-AE_WQR
-Time_WQR
-Time_total
+AE_WQR     ##estimation error
+Time_WQR   ##running time for solving WQR problem  
+Time_total ##total computational time
 ```
