@@ -149,5 +149,5 @@ Time_total = paraWQR$Time_total
 ###output the results
 AE_paraWQR     ##estimation error
 Time_paraWQR   ##running time for solving WQR problem  
-Time_total ##total computational time
+Time_total     ##total computational time
 ```
