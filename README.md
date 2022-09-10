@@ -138,7 +138,7 @@ Y = X%*%beta+apply(X[,1:d]*e/d, 1, sum)
 beta_true = c(quantile(e/d, tau)+beta[1:d], beta[(d+1):p])
 
 ###calculate the weighted quantile regression estimator in parallel
-k = 3          ##number of partitions
+k = 10         ##number of partitions
 paraWQR = paraWQRADMM(X, Y, k, rep, tau, FALSE, "WQR")
 beta_paraWQR = paraWQR$Estimation_WQR
 AE_paraWQR = sum(abs(beta_paraWQR-beta_true))
