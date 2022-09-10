@@ -90,21 +90,10 @@ Time_WQR   ##running time for solving WQR problem
 Time_total ##total computational time
 ```
 
-## Code for testing WQRADMM
+## Code for testing paraWQRADMM
 
 ```
-N = 20000
-p = 100
-n = 10
-rep = rep(n, N)
-nsum = sum(rep)
-d = 0.75*p
-rho_X = 0.5
-rho_e = 0.5
-tau = 0.75
-sigma = 0.5
-K = c(1, 5, 10, 20, 50, 100)
- 
+###function for generating the correlation matrix (AR(1) or exchangeable) 
 gcov = function(p, rho, type){
   if(type == "exchangeable"){
     cov = matrix(rho, p, p)
@@ -122,6 +111,16 @@ gcov = function(p, rho, type){
   cov
 }
 
+###generate synthetic data (heteroscedastic model with d = 0.75*p under Student's t error)
+N = 20000
+p = 100
+n = 10
+rep = rep(n, N)
+nsum = sum(rep)
+d = 0.75*p
+rho_X = 0.5
+rho_e = 0.5
+tau = 0.75
 set.seed(999)
 X = matrix(rnorm(nsum*p), nsum, p)
 cov_X = gcov(p, rho_X, "ar1")
@@ -133,16 +132,22 @@ beta = rnorm(p)
 cov_e = gcov(n, rho_e, "ar1")
 e = matrix(rt(N*n, 3), N, n)
 e = as.vector(t(e%*%chol(cov_e)))
+sigma = 0.5
 e = sigma*e
 Y = X%*%beta+apply(X[,1:d]*e/d, 1, sum)
 beta_true = c(quantile(e/d, tau)+beta[1:d], beta[(d+1):p])
 
-k = 3
-
-paraWQR = paraWQRADMM(X, Y, K[k], rep, tau, FALSE, "WQR")
+###calculate the weighted quantile regression estimator in parallel
+k = 3  #number of partitions
+paraWQR = paraWQRADMM(X, Y, k, rep, tau, FALSE, "WQR")
 beta_paraWQR = paraWQR$Estimation_WQR
 AE_paraWQR = sum(abs(beta_paraWQR-beta_true))
 Iteration_paraWQR = paraWQR$Iteration_WQR
 Time_paraWQR = paraWQR$Time_WQR
 Time_total = paraWQR$Time_total
+
+###output the results
+AE_paraWQR     ##estimation error
+Time_paraWQR   ##running time for solving WQR problem  
+Time_total ##total computational time
 ```
