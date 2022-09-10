@@ -89,3 +89,60 @@ AE_WQR     ##estimation error
 Time_WQR   ##running time for solving WQR problem  
 Time_total ##total computational time
 ```
+
+## Code for testing WQRADMM
+
+```
+N = 20000
+p = 100
+n = 10
+rep = rep(n, N)
+nsum = sum(rep)
+d = 0.75*p
+rho_X = 0.5
+rho_e = 0.5
+tau = 0.75
+sigma = 0.5
+K = c(1, 5, 10, 20, 50, 100)
+ 
+gcov = function(p, rho, type){
+  if(type == "exchangeable"){
+    cov = matrix(rho, p, p)
+    diag(cov) = rep(1, p)
+  }
+  else{
+    cov = diag(p)
+    for(i in 1:p){
+      for(j in 1:p){
+        if(i < j) cov[i,j] = rho^{j-i}
+        else cov[i,j] = cov[j,i]
+      }
+    }
+  }
+  cov
+}
+
+set.seed(999)
+X = matrix(rnorm(nsum*p), nsum, p)
+cov_X = gcov(p, rho_X, "ar1")
+X = X%*%chol(cov_X)
+for(i in 1:d){
+  X[,i] = pnorm(X[,i])
+}
+beta = rnorm(p)
+cov_e = gcov(n, rho_e, "ar1")
+e = matrix(rt(N*n, 3), N, n)
+e = as.vector(t(e%*%chol(cov_e)))
+e = sigma*e
+Y = X%*%beta+apply(X[,1:d]*e/d, 1, sum)
+beta_true = c(quantile(e/d, tau)+beta[1:d], beta[(d+1):p])
+
+k = 3
+
+paraWQR = paraWQRADMM(X, Y, K[k], rep, tau, FALSE, "WQR")
+beta_paraWQR = paraWQR$Estimation_WQR
+AE_paraWQR = sum(abs(beta_paraWQR-beta_true))
+Iteration_paraWQR = paraWQR$Iteration_WQR
+Time_paraWQR = paraWQR$Time_WQR
+Time_total = paraWQR$Time_total
+```
