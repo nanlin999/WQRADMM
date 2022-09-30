@@ -16,6 +16,10 @@ Install RTools and further put its location on the environment variable PATH bef
 
 ## Code for installing WQRADMM
 ```
+install.packages("Rcpp")
+library(Rcpp)
+install.packages("RcppArmadillo")
+library(RcppArmadillo)
 install.packages("devtools")
 library(devtools)
 install_github("https://github.com/nanlin999/WQRADMM", force = TRUE)
