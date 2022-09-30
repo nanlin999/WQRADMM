@@ -1,9 +1,8 @@
 #' Weighted Quantile Regression for Longitudinal Big Data Based on Multi-Block ADMM
-#' This is a pseudo-parallel implementation.
+#' This is a non-parallel implementation.
 #'
 #' @param x The design matrix (without intercept)
 #' @param y The response vector
-#' @param K The number of partitions (split the full data into K subsets)
 #' @param rep The repeat observation number for each subject
 #' @param tau The quantile of interest
 #' @param intercept Whether to include the intercept into the model
@@ -61,17 +60,20 @@
 #' Y = beta0+X%*%beta+apply(X[,1:d]*e/d, 1, sum)
 #' beta_true = c(beta0, quantile(e/d, tau)+beta[1:d], beta[(d+1):p])
 #'
-#' k = 10
-#' paraWQR = paraWQRADMM(X, Y, k, rep, tau, FALSE, "WQR")
-#' beta_paraWQR = paraWQR$Estimation_WQR
-#' AE_paraWQR = sum(abs(beta_paraWQR-beta_true))
-#' Time_paraWQR = paraWQR$Time_WQR
-#' Time_total = paraWQR$Time_total
+#' WQR = WQRADMM(X, Y, rep, tau, TRUE, "WQR")
+#' beta_WQR = WQR$Estimation_WQR
+#' AE_WQR = sum(abs(beta_WQR-beta_true))
+#' Time_WQR = WQR$Time_WQR
+#' Time_WQRADMM = WQR$Time_total
 #' @export
 #'
 
-paraWQRADMM <- function(x, y, K, rep, tau, intercept, esttype, corrtype = "ar1", rhoCQR = 1, rhoWQR = 1, eps = 1e-04, epsw = 1e-06, maxstep = 3000, maxstepw = 100) {
-  .Call('_WQRADMM_paraWQRADMM', PACKAGE = 'WQRADMM', x, y, K, rep, tau, intercept, esttype, corrtype, rhoCQR, rhoWQR, eps, epsw, maxstep, maxstepw)
+WQRADMM <- function(x, y, rep, tau, intercept, esttype, corrtype = "ar1", rhoCQR = 1, rhoWQR = 1, eps = 1e-04, epsw = 1e-06, maxstep = 3000, maxstepw = 100) {
+  .Call('_WQRADMM_WQRADMM', PACKAGE = 'WQRADMM', x, y, rep, tau, intercept, esttype, corrtype, rhoCQR, rhoWQR, eps, epsw, maxstep, maxstepw)
+}
+
+WS <- function(x, y, rep, tau, betahat, intercept, corrtype = "ar1", epsw = 1e-06, maxstepw = 100) {
+  .Call('_WQRADMM_WS', PACKAGE = 'WQRADMM', x, y, rep, tau, betahat, intercept, corrtype, epsw, maxstepw)
 }
 
 
